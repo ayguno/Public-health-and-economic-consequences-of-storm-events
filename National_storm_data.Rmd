@@ -1,7 +1,7 @@
-# Examination of the public health and economic consequences of storm events across the United States 
-
-
-Ozan Aygun
+---
+title: "Examination of the public health and economic consequences of storm events across the United States"
+author: "Ozan Aygun"
+---
 
 November 10th, 2016
 
