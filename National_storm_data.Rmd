@@ -1,32 +1,44 @@
 ---
 title: "Examination of the public health and economic consequences of storm events across the United States"
 author: "Ozan Aygun"
+date: "November 10th, 2016"
+output: 
+   html_document:
+        toc: true
+        number_sections: true
+        depth: 4
+        theme: cerulean
+        highlight: espresso
+        df_print: paged
 ---
 
-November 10th, 2016
 
-## Synopsis
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE)
+```
+
+# Synopsis
 
 Here I present the detailed analysis of the data provided by the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database to determine the storm events that cause highest economic and public health consequences in the United States. The results presented here suggests that tornadoes are the most harmful weather event that is associated with over 5000 death and 75000 injuries across the U.S between 1950 and 2011. On the other hand, flood is determined as the leading severe weather event that is linked to the highest property damage, costing approximately 150 billion U.S dollars in the same period. In terms of U.S. agriculture, drought has a bigger impact on the crop damage, resulting in a loss of nearly 15 billion U.S dollars. Finally, I also present the geospatial distribution of these severe weather events to demonstrate their relative impact on public health and economy across different states. These observations might facilitate the decision making of government authorities and allow prioritization of resources to prepare for different types of severe weather events.
 
 
-## Data Processing
+# Data Processing
 
-**Data**
+##Data
 
 The data used in this analysis is obtained from the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database, which records the severe weather and storm events between 1950 and 2011, along with public health and economic consequences associated with them. Detailed information of the dataset can be obtained in the National Weather Service [Storm Data Documentation][1], and the data set can be downloaded [here][2].
 
 [1]:https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf  "Storm Data Documentation"
 [2]: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2 "here"
 
-**Reading and cleaning the data set**
+##Reading and cleaning the data set
 
 Downloading and reading the data:
 ```{r,cache=TRUE}
 fileURL = "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
-if(!exists("./storm_data.csv")){
-download.file(fileURL,destfile = "./storm_data.csv")}
-storm_data <- read.csv("./storm_data.csv", stringsAsFactors = FALSE)
+# if(!exists("./storm_data.csv")){
+# download.file(fileURL,destfile = "./storm_data.csv")}
+storm_data <- read.csv("storm_data.csv", stringsAsFactors = FALSE)
 ```
 
 When inspecting the **EVTYPE** variable,which represents the types of events recorded, I noticed that there are several redundancies related to inconsistent data entry.
@@ -48,7 +60,7 @@ unknownevents <- sum(which(storm_data$EVTYPE == "?"))
 
 I noticed that there are `r events` event type combinations remained after cleaning this variable. One of these categories is "?", representing unspecified severe weather events. There are `r unknownevents` unspecified events recorded in the dataset, which will be included in this analysis. 
 
-## Results
+# Results
 
 In the this analysis, I sought to find answers to the following important questions:
 
@@ -59,7 +71,7 @@ In the this analysis, I sought to find answers to the following important questi
 Below I present the results of the detailed analysis along with the associated code, which is aimed to answer these interesting questions.
 
 
-###Tornadoes are the most harmful severe weather events across the United States
+##Tornadoes are the most harmful severe weather events across the United States
 
 Public health impact is represented by FATALITIES and INJURIES variables in the data set. Death is the most important public health outcome, therefore it takes the highest priority.
 
@@ -185,7 +197,7 @@ When the most frequently occurring events are explored, hail appears as the lead
 **Therefore, these observations collectively indicate that tornadoes are the leading severe weather events that impact on the public health in the U.S.**
 
 
-###Flood and Drought have the greatest economic consequences for the United States
+##Flood and Drought have the greatest economic consequences for the United States
 
 
 The economic consequences are reflected in the data set by two variables:
@@ -458,7 +470,7 @@ Tornado-related deaths are quite prominent in southern states, particularly in T
 
 Economic consequences of severe weather events also reveal interesting patterns across the country **(FIGURES 3C and 3D)**. California has suffered the greatest flood-associated property damage, which is more than 10 billion $ **(FIGURE 3C)**. On the other hand, Texas, Georgia and Iowa experienced the highest amount of crop damage that is associated with droughts **(FIGURE 3D)**.
 
-## Conclusions
+# Conclusions
 
 The analyses illustrated here provides an important resource for further investigation of the weather events that are harmful for public health and have 
 severe economic consequences. I hope this would enable government officials to allocate and prioritize the required resources for the most fragile states in order to get better prepared for these natural events. 
